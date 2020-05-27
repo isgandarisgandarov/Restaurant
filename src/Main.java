@@ -19,179 +19,247 @@ public class Main {
         while (true){
             try {
                 while (true){
+                    separate();
                     greetings();
+
                     System.out.println("[1] Restaurant management system");
                     System.out.println("[2] Customer service");
                     System.out.println("[3] Exit");
-                    System.out.println("Choose:");
+
+                    choose();
+
                     int choice1 = scanner.nextInt();
-                    if (choice1 == 1){
 
-                        while (true){
-                            separate();
-                            System.out.println("----Restaurant management system----");
-                            System.out.println("[1] Employees");
-                            System.out.println("[2] Menu");
-                            System.out.println("[3] Go back");
-                            System.out.println("Choose: ");
-                            int choice2 = scanner.nextInt();
-                            if (choice2 == 1){
+                    switch (choice1){
+                        case 1:
+                            while (true){
+                                separate();
 
-                                while (true) {
-                                    separate();
-                                    System.out.println("[1] Show employees");
-                                    System.out.println("[2] Add employee");
-                                    System.out.println("[3] Remove employee");
-                                    System.out.println("[4] Go back");
-                                    System.out.println("Choose: ");
-                                    int choice3 = scanner.nextInt();
+                                System.out.println("----Restaurant management system----");
+                                System.out.println("[1] Employees");
+                                System.out.println("[2] Menu");
+                                System.out.println("[3] Go back");
 
-                                    if (choice3 == 1) {
-                                        restaurant.showEmployees();
-                                    }
-                                    if (choice3 == 2) {
-                                        System.out.println("Enter the name: ");
-                                        String name = scanner.next();
-                                        System.out.println("Enter the surname: ");
-                                        String surname = scanner.next();
-                                        System.out.println("Enter the position: ");
-                                        String position = scanner.next();
-                                        System.out.println("Enter the salary: ");
-                                        int salary = scanner.nextInt();
-                                        restaurant.addEmployee(name, surname, position, salary);
-                                        System.out.println("The employee added successfully");
-                                    }
-                                    if (choice3 == 3){
-                                        int initialSize = restaurant.getEmployees().size();
-                                        System.out.println("Enter the name: ");
-                                        String name = scanner.next();
-                                        System.out.println("Enter the surname: ");
-                                        String surname = scanner.next();
-                                        restaurant.removeEmployee(name, surname);
-                                        if (initialSize == restaurant.getEmployees().size()){
-                                            System.out.println("The employee is not found in the system!");
+                                choose();
+
+                                int choice2 = scanner.nextInt();
+
+                                switch (choice2){
+                                    case 1:
+                                        while (true) {
+                                            separate();
+                                            showEmployees();
+
+                                            addEmployee();
+                                            removeEmployee();
+
+                                            goBack();
+                                            choose();
+
+                                            int choice3 = scanner.nextInt();
+
+                                            switch (choice3){
+                                                case 1:
+                                                    restaurant.showEmployees();
+                                                    break;
+
+                                                case 2:
+                                                    System.out.println("Enter the name: ");
+                                                    String name = scanner.next();
+
+                                                    System.out.println("Enter the surname: ");
+                                                    String surname = scanner.next();
+
+                                                    System.out.println("Enter the position: ");
+                                                    String position = scanner.next();
+
+                                                    System.out.println("Enter the salary: ");
+                                                    double salary = scanner.nextDouble();
+
+                                                    restaurant.addEmployee(name, surname, position, salary);
+                                                    System.out.println("The employee added successfully");
+
+                                                    break;
+
+                                                case 3:
+                                                    int initialSize = restaurant.getEmployees().size();
+
+                                                    System.out.println("Enter the name: ");
+                                                    String nameOfEmployee = scanner.next();
+
+                                                    System.out.println("Enter the surname: ");
+                                                    String surnameOfEmployee = scanner.next();
+
+                                                    restaurant.removeEmployee(nameOfEmployee, surnameOfEmployee);
+
+                                                    if (initialSize == restaurant.getEmployees().size()) System.out.println("The" +
+                                                            " employee is not found in the system!");
+                                                    break;
+                                            }
+
+                                            if (choice3 == 4) break;
+
                                         }
-                                    }
-                                    if (choice3 == 4) break;
+                                        break;
+                                    case 2:
+                                        while (true){
+                                            separate();
+                                            showMenu();
+
+                                            addMeal();
+                                            removeMeal();
+
+                                            goBack();
+                                            choose();
+
+                                            int choice4 = scanner.nextInt();
+
+                                            switch (choice4){
+                                                case 1:
+                                                    restaurant.getMenu().showSalads();
+                                                    restaurant.getMenu().showDesserts();
+                                                    restaurant.getMenu().showMeats();
+                                                    break;
+
+                                                case 2:
+                                                    choose();
+
+                                                    salad();
+                                                    dessert();
+                                                    meat();
+
+                                                    int mealChoice = scanner.nextInt();
+
+                                                    switch (mealChoice){
+                                                        case 1:
+                                                            System.out.println("Enter the name: ");
+                                                            String nameOfSalad = scanner.next();
+
+                                                            System.out.println("Enter the calories: ");
+                                                            double caloriesOfSalad = scanner.nextDouble();
+
+                                                            System.out.println("Enter the price: ");
+                                                            double priceOfSalad = scanner.nextDouble();
+
+                                                            Salad salad = new Salad(nameOfSalad, caloriesOfSalad, priceOfSalad);
+                                                            restaurant.getMenu().addSalads(salad);
+
+                                                            break;
+
+                                                        case 2:
+                                                            System.out.println("Enter the name: ");
+                                                            String nameOfDessert = scanner.next();
+
+                                                            System.out.println("Enter the calories: ");
+                                                            double caloriesOfDessert = scanner.nextDouble();
+
+                                                            System.out.println("Enter the price: ");
+                                                            double priceOfDessert = scanner.nextDouble();
+
+                                                            Dessert dessert = new Dessert(nameOfDessert, caloriesOfDessert, priceOfDessert);
+                                                            restaurant.getMenu().addDessert(dessert);
+
+                                                            break;
+
+                                                        case 3:
+                                                            System.out.println("Enter the name: ");
+                                                            String nameOfMeat = scanner.next();
+
+                                                            System.out.println("Enter the calories: ");
+                                                            double caloriesOfMeat = scanner.nextDouble();
+
+                                                            System.out.println("Enter the price: ");
+                                                            double priceOfMeat = scanner.nextDouble();
+
+                                                            Meat meat = new Meat(nameOfMeat, caloriesOfMeat, priceOfMeat);
+                                                            restaurant.getMenu().addMeat(meat);
+                                                            break;
+                                                    }
+                                                    break;
+
+                                                case 3:
+                                                    try {
+
+                                                        choose();
+
+                                                        salad();
+                                                        dessert();
+                                                        meat();
+
+                                                        int mealChoice2 = scanner.nextInt();
+
+                                                        switch (mealChoice2){
+                                                            case 1:
+                                                                System.out.println("Enter the name of salad: ");
+                                                                String nameOfSalad = scanner.next();
+                                                                restaurant.getMenu().removeSalad(nameOfSalad);
+                                                                break;
+
+                                                            case 2:
+                                                                System.out.println("Enter the name of dessert: ");
+                                                                String nameOfDessert = scanner.next();
+                                                                restaurant.getMenu().removeDessert(nameOfDessert);
+                                                                break;
+
+                                                            case 3:
+                                                                System.out.println("Enter the name of meat: ");
+                                                                String nameOfMeat = scanner.next();
+                                                                restaurant.getMenu().removeMeat(nameOfMeat);
+                                                                break;
+                                                        }
+
+                                                    }catch (ConcurrentModificationException e){
+                                                        continue;
+                                                    }
+                                                    break;
+                                            }
+
+                                            if (choice4 == 4) break;
+                                        }
+                                        break;
                                 }
+                                if (choice2 == 3) break;
                             }
-                            if (choice2 == 2){
-                                while (true){
-                                    separate();
-                                    System.out.println("[1] Show menu");
-                                    System.out.println("[2] Add a meal");
-                                    System.out.println("[3] Remove a meal");
-                                    System.out.println("[4] Go back");
-                                    System.out.println("Choose: ");
-                                    int choice4 = scanner.nextInt();
-                                    if (choice4 == 1){
-                                        restaurant.getMenu().showSalads();
-                                        restaurant.getMenu().showDesserts();
-                                        restaurant.getMenu().showMeats();
-                                    }
-                                    if (choice4 == 2) {
-                                        System.out.println("Choose type of the meal: ");
-                                        System.out.println("[1] Salad");
-                                        System.out.println("[2] Dessert");
-                                        System.out.println("[3] Meat");
-                                        int mealChoice = scanner.nextInt();
-                                        if (mealChoice == 1) {
-                                            System.out.println("Enter the name: ");
-                                            String name = scanner.next();
-                                            System.out.println("Enter the calories: ");
-                                            double calories = scanner.nextDouble();
-                                            System.out.println("Enter the price: ");
-                                            double price = scanner.nextDouble();
-                                            Salad salad = new Salad(name, calories, price);
-                                            restaurant.getMenu().addSalads(salad);
-                                        }
-                                        if (mealChoice == 2) {
-                                            System.out.println("Enter the name: ");
-                                            String name = scanner.next();
-                                            System.out.println("Enter the calories: ");
-                                            double calories = scanner.nextDouble();
-                                            System.out.println("Enter the price: ");
-                                            double price = scanner.nextDouble();
-                                            Dessert dessert = new Dessert(name, calories, price);
-                                            restaurant.getMenu().addDessert(dessert);
-                                        }
-                                        if (mealChoice == 3){
-                                            System.out.println("Enter the name: ");
-                                        String name = scanner.next();
-                                        System.out.println("Enter the calories: ");
-                                        double calories = scanner.nextDouble();
-                                        System.out.println("Enter the price: ");
-                                        double price = scanner.nextDouble();
-                                        Meat meat = new Meat(name, calories, price);
-                                        restaurant.getMenu().addMeat(meat);
-                                        }
-                                    }
-                                    if (choice4 == 3) {
-                                        try {
-                                            System.out.println("Choose type of the meal: ");
-                                            System.out.println("[1] Salad");
-                                            System.out.println("[2] Dessert");
-                                            System.out.println("[3] Meat");
-                                            int mealChoice = scanner.nextInt();
-                                            if (mealChoice == 1) {
-                                                System.out.println("Enter the name of salad: ");
-                                                String name = scanner.next();
-                                                restaurant.getMenu().removeSalad(name);
-                                            }
-                                            if (mealChoice == 2) {
-                                                System.out.println("Enter the name of dessert: ");
-                                                String name = scanner.next();
-                                                restaurant.getMenu().removeDessert(name);
-                                            }
-                                            if (mealChoice == 3) {
-                                                System.out.println("Enter the name of meat: ");
-                                                String name = scanner.next();
-                                                restaurant.getMenu().removeMeat(name);
-                                            }
-                                        }catch (ConcurrentModificationException e){
-                                            continue;
-                                        }
-                                    }
-                                    if (choice4 == 4) break;
+                            break;
 
-                                }
+                        case 2:
+                            try {
+                                restaurant.getMenu().showSalads();
+
+                                System.out.println("Enter the names of salads that you want separated by space: ");
+                                String salad = scanner.next();
+                                String[] soldSalads = salad.split(" ");
+
+                                restaurant.getMenu().showMeats();
+
+                                System.out.println("Enter the names of meats that you want separated by space: ");
+                                String meat = scanner.next();
+                                String[] soldMeats = meat.split(" ");
+
+                                restaurant.getMenu().showDesserts();
+
+                                System.out.println("Enter the names of desserts that you want separated by space: ");
+                                String dessert = scanner.next();
+                                String[] soldDesserts = dessert.split(" ");
+
+                                totalPrice(soldMeats, soldSalads, soldDesserts, restaurant);
+
+                                restaurant.getFinance().sell(soldMeats,soldSalads,soldDesserts, restaurant);
+
+                                System.out.println();
+
+                            }catch (InputMismatchException e){
+                                System.out.println("Wrong input!");
                             }
-                            if (choice2 == 3) break;
+                            break;
 
-                        }
-
-                    }
-                    if (choice1 == 2){
-                        try {
-                            restaurant.getMenu().showSalads();
-                            System.out.println("Enter the names of salads that you want separated by space: ");
-                            String salad = scanner.next();
-                            String[] soldSalads = salad.split(" ");
-                            restaurant.getMenu().showMeats();
-                            System.out.println("Enter the names of meats that you want separated by space: ");
-                            String meat = scanner.next();
-                            String[] soldMeats = meat.split(" ");
-                            restaurant.getMenu().showDesserts();
-                            System.out.println("Enter the names of desserts that you want separated by space: ");
-                            String dessert = scanner.next();
-                            String[] soldDesserts = dessert.split(" ");
-
-                            totalPrice(soldMeats, soldSalads, soldDesserts, restaurant);
-                            restaurant.getFinance().sell(soldMeats,soldSalads,soldDesserts, restaurant);
-                            System.out.println();
-                        }catch (InputMismatchException e){
-                            System.out.println("Wrong input!");
-                            }
-                    }
-
-
-                    if (choice1 == 3){
-                        System.exit(0);
+                        case 3:
+                            System.exit(0);
                     }
                 }
             }catch (InputMismatchException e) {
                 System.out.println("Wrong input!");
-
+                scanner.nextLine(); // in order not to have an endless loop
             }
         }
 
@@ -236,5 +304,48 @@ public class Main {
         System.out.println("-------------------------------------------------------------------------------------");
     }
 
+    public static void showEmployees(){
+        System.out.println("[1] Show employees");
+    }
+
+    public static void addEmployee(){
+        System.out.println("[2] Add employee");
+    }
+
+    public static void removeEmployee(){
+        System.out.println("[3] Remove employee");
+    }
+
+    public static void goBack(){
+        System.out.println("[4] Go back");
+    }
+
+    public static void choose(){
+        System.out.println("Choose: ");
+    }
+
+    public static void showMenu(){
+        System.out.println("[1] Show menu");
+    }
+
+    public static void addMeal(){
+        System.out.println("[2] Add a meal");
+    }
+
+    public static void removeMeal(){
+        System.out.println("[3] Remove a meal");
+    }
+
+    public static void salad(){
+        System.out.println("[1] Salad");
+    }
+
+    public static void dessert(){
+        System.out.println("[2] Dessert");
+    }
+
+    public static void meat(){
+        System.out.println("[3] Meat");
+    }
 
 }
