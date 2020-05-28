@@ -4,6 +4,7 @@ public class Restaurant {
 
     private String name, address;
     private final Menu menu = new Menu();
+
     private final Finance finance = new Finance(0);
     private final ArrayList<Employee> employees =new ArrayList<>();
 
@@ -48,6 +49,7 @@ public class Restaurant {
 
     public void removeEmployee(String name, String surname){
         int size1 = employees.size();
+
         for (Employee employee : employees){
             if (employee.getName().equals(name) && employee.getSurname().equals(surname)){
                 System.out.printf("'%s %s' is removed from the system!", name, surname);
@@ -59,6 +61,7 @@ public class Restaurant {
 
     public void showEmployees(){
         if (employees.size() == 0) System.out.println("There is no employee in the restaurant!");
+
         else {
             for (Employee employee : employees) {
                 System.out.printf("Name: %s Surname: %s Position: %s Salary: %s", employee.getName(), employee.getSurname(),

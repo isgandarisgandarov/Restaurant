@@ -15,7 +15,9 @@ public class Finance implements Transaction {
     @Override
     public void sell(String[] meats, String[] salads, String[] desserts,  Restaurant restaurant) {
         for (Meat soldMeat : restaurant.getMenu().getMeats()){
+
             for (String meatName : meats){
+
                 if (soldMeat.getName().equals(meatName)){
                     budget += soldMeat.getPrice();
                 }
@@ -23,7 +25,9 @@ public class Finance implements Transaction {
         }
 
         for (Salad soldSalad : restaurant.getMenu().getSalads()){
+
             for (String saladName : salads){
+
                 if (soldSalad.getName().equals(saladName)){
                     budget += soldSalad.getPrice();
                 }
@@ -31,7 +35,9 @@ public class Finance implements Transaction {
         }
 
         for (Dessert soldDessert : restaurant.getMenu().getDesserts()){
+
             for (String dessertName : desserts){
+
                 if (soldDessert.getName().equals(dessertName)){
                     budget += soldDessert.getPrice();
                 }
